@@ -1,0 +1,18 @@
+{% extends 'template.html' %}
+
+{% block title %} Quiz! {% endblock %}
+
+{% block content %}
+    <h1>Quiz!</h1>
+
+    <div id="question">
+        {{question}}
+    </div>
+
+    <div class="answers">
+        {% for answer in answers %}
+            {{answer}}
+        {% endfor %}
+    </div>
+
+{% endblock %}
