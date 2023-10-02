@@ -10,3 +10,48 @@
     height: 100vh;
     justify-content: center;
 }
+
+.container {
+    box-sizing: border-box;
+    display: flex;
+    padding: 20px;
+    height: 60%;
+    width: 80%;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 25px;
+}
+
+#question {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.answers {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Source: https://cssbuttons.app/buttons/49 */
+.bn49 {
+    border: 0;
+    text-align: center;
+    display: inline-block;
+    padding: 14px;
+    width: 150px;
+    margin: 7px;
+    color: #ffffff;
+    background-color: #36a2eb;
+    border-radius: 8px;
+    font-family: "proxima-nova-soft", sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    transition: box-shadow 200ms ease-out;
+  }
+
+.bn49:hover {
+    cursor: pointer;
+    background-color: #194d70;
+}

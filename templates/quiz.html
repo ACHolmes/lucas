@@ -5,14 +5,22 @@
 {% block content %}
     <h1>Quiz!</h1>
 
-    <div id="question">
-        {{question}}
+    <div class="container">
+        <div id="question">
+            <h2>
+                {{question}}
+            </h2>
+            
+        </div>
+    
+        <div class="answers">
+            {% for answer in answers %}
+                <button class="bn49">
+                    {{answer}}
+                </button>
+            {% endfor %}
+        </div>
     </div>
 
-    <div class="answers">
-        {% for answer in answers %}
-            {{answer}}
-        {% endfor %}
-    </div>
 
 {% endblock %}
