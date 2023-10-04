@@ -15,9 +15,15 @@
     
         <div class="answers">
             {% for answer in answers %}
-                <button class="bn49">
-                    {{answer}}
+                {% if answer[1] %}
+                <button class="bn49 correct">
+                    {{answer[0]}}
                 </button>
+                {% else %}
+                <button class="bn49">
+                    {{answer[0]}}
+                </button>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
