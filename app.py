@@ -4,7 +4,9 @@ import sqlite3
 
 # Flask setup
 app = Flask(__name__)
- 
+
+DB_PATH = "instance/data.db"
+
 # The route() function of the Flask class is a decorator,
 # which tells the application which URL should call
 # the associated function.
