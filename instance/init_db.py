@@ -31,19 +31,27 @@ def create_table():
         # Create a cursor (something to actually modify the databse)
         cur = con.cursor()
         
-        # Doing basically the minimum/laziest option, store as many 
-        # incorrect answers as is possible, all in one table.
+        # Doing this a much more sensible way, storing questions and answers separately
         cur.execute("""
                         CREATE TABLE IF NOT EXISTS questions (
-                            question VARCHAR(1000),
-                            correct VARCHAR(1000),
-                            incorrect1 VARCHAR(1000),
-                            incorrect2 VARCHAR(1000),
-                            incorrect3 VARCHAR(1000),
-                            incorrect4 VARCHAR(1000)
+                            question_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            question VARCHAR(1000)
                         )
                     """)
         # Commit those changes over the connection
+        con.commit()
+
+        # Create a table that stores answers and links them to question ids
+        # so that we can have unlimited answers per question, and multiple
+        # correct answers
+        cur.execute("""
+                CREATE TABLE IF NOT EXISTS answers (
+                    answer_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    question_id INTEGER,
+                    answer VARCHAR(1000),
+                    correct BOOL
+                )
+            """)
         con.commit()
 
 # Clears all data from table
@@ -66,6 +74,12 @@ def see_table():
         for res in results:
             print(res)
 
+        results = cur.execute("""
+                                SELECT * FROM answers
+                              """).fetchall()
+        for res in results:
+            print(res)
+
 '''
 TODO: Complete the fill_table function to store all the question data.
 How you store the data in the database is up to you, but will depend
@@ -77,33 +91,31 @@ def fill_table():
             dictreader = csv.DictReader(csvfile, delimiter = ',')
             for q in dictreader:
                 cur = con.cursor()
-                # Doing the lazy thing and just throwing everything into a table
-                # Even if it doesn't have all fields (just gives empty strings)
+                
+                # Insert the question
                 cur.execute("""
-                                INSERT INTO questions (
-                                    question,
-                                    correct, 
-                                    incorrect1,
-                                    incorrect2,
-                                    incorrect3,
-                                    incorrect4
-                                ) VALUES (
-                                    ?,
-                                    ?, 
-                                    ?,
-                                    ?,
-                                    ?,
-                                    ?
-                                )
-                            """, (
-                                q["Question"],
-                                q["Correct"],
-                                q["Incorrect 1"],
-                                q["Incorrect 2"],
-                                q["Incorrect 3"],
-                                q["Incorrect 4"]
-                            ))
+                                INSERT INTO questions (question) VALUES (?)
+                            """,                    (q["Question"], ))
                 con.commit()
+
+                id = cur.execute("SELECT question_id FROM questions WHERE question = ?",
+                                 (q["Question"], )).fetchone()[0]
+
+                # Insert correct answer
+                cur.execute("""
+                                INSERT INTO answers (question_id, answer, correct) 
+                                            VALUES  (?, ?, ?)
+                            """, (id, q["Correct"], True, ))
+                con.commit()
+
+                # Insert all incorrect answers
+                for k, v in q.items():
+                    if not(k == "Correct" or k == "Question" or v==""):
+                        cur.execute("""
+                                INSERT INTO answers (question_id, answer, correct) 
+                                            VALUES  (?, ?, ?)
+                            """, (id, v, False))
+                        con.commit()
 
 if __name__ == "__main__":
     create_table()

@@ -21,20 +21,19 @@ def quiz():
     with sqlite3.connect(DB_PATH) as con:
         cur = con.cursor()
 
-        # Get all the data
-        question_data = cur.execute("SELECT * FROM questions ORDER BY RANDOM() LIMIT 1").fetchone()
+        # Get question data
+        question_id, question = cur.execute("SELECT * FROM questions ORDER BY RANDOM() LIMIT 1").fetchone()
         
-        # Extract information
-        question = question_data[0]
-        answer = question_data[1]
-        incorrect_answers = list(filter(lambda x: x != '', question_data[2:]))
-        all_answers = [(answer, True)] + [(ans, False) for ans in incorrect_answers]
+        # Get corresponding answer data
+        answer_data = cur.execute("""SELECT answer, correct FROM answers
+                                     WHERE question_id = ? 
+                                  """, (question_id, )).fetchall()
         
         # Randomly shuffle the answers, while storing info for which one is correct
-        random.shuffle(all_answers)
+        random.shuffle(answer_data)
 
         # Send to template
-        return render_template("quiz.html", question=question, answers=all_answers)
+        return render_template("quiz.html", question=question, answers=answer_data)
 
 
 # A route in case you want to check answers by making a request
