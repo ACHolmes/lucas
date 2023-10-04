@@ -10,7 +10,7 @@ You need to:
 
 * tweak the `create_table` function to create a table appropriate to store the questions and corresponding answers to the quiz questions.
 
-    * While not required, if you have time, try to implement this so that your system would work for questions with an unknown number of answers, where there may even be more than one correct answer. Reminder: not required, but if you have time. Otherwise, please writeup how you think you might do so. (This may be of use to you)[https://www.sqlitetutorial.net/sqlite-autoincrement/].
+    * While not required, if you have time, try to implement this so that your system would work for questions with an unknown number of answers, where there may even be more than one correct answer. Reminder: not required, but if you have time. Otherwise, please writeup how you think you might do so. [This may be of use to you](https://www.sqlitetutorial.net/sqlite-autoincrement/).
 
 * Complete the `fill_table` function to insert the data into your database. Feel free to use any of the code provided above to help you, or other packages you are comfortable with (e.g. `pandas`) if you find them useful.
 
@@ -27,3 +27,7 @@ Now we need to make sure our questions and answers are actually used by the webs
 ## Part 3: documentation/cleanup
 
 This shouldn't be its own section, but this is more of a reminder to make sure you keep your code reasonably tidy and well-documented. I've documented just enough so that hopefully everything is clear, but you can certainly do a better job. Feel free to refactor/cleanup or modify any of the code provided to you.
+
+## Part 4: Personal Touch
+
+If you have finished the previous sections within a reasonable amount of time, you should implement a small personal adjustment to this project. Some ideas could be: improving the styling of the `quiz` page, adding a score element to the page to keep track of how many questions you've answered correctly this session, buttons to get a new question once you've answer a question correctly or something of similar scope. Feel free to be creative, but again this is not meant to be large-scale or particulary time-consuming to implement (please spend no more than 30 mins on this).
