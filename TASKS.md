@@ -1,6 +1,6 @@
 # What to do
 
-Note: I would recommend reading this in its entirey once before you get started just so you have an idea of the plan ahead, and what you are allowed to do (i.e. basically anything you want that gets the job done).
+I would recommend reading this in its entirey once before you get started just so you have an idea of the plan ahead, and what you are allowed to do (i.e. basically anything you want that gets the job done). There may be some unfamiliar tools used in here, and it is expected you use the internet to help you. I have already imported some useful libraries for you, but I imagine you will want to include 1 more library at a minimum, and perhaps more depending on how you choose to implement this.
 
 ## Part 1: Setting up the quiz data
 
@@ -10,7 +10,7 @@ You need to:
 
 * tweak the `create_table` function to create a table appropriate to store the questions and corresponding answers to the quiz questions.
 
-    * While not required, if you have time, try to implement this so that your system would work for questions with an unknown number of answers, where there may even be more than one correct answer. Reminder: not required, but if you have time. Otherwise, please writeup how you think you might do so.
+    * While not required, if you have time, try to implement this so that your system would work for questions with an unknown number of answers, where there may even be more than one correct answer. Reminder: not required, but if you have time. Otherwise, please writeup how you think you might do so. (This may be of use to you)[https://www.sqlitetutorial.net/sqlite-autoincrement/].
 
 * Complete the `fill_table` function to insert the data into your database. Feel free to use any of the code provided above to help you, or other packages you are comfortable with (e.g. `pandas`) if you find them useful.
 
